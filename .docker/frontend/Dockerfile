@@ -11,7 +11,10 @@ RUN npm install
 
 CMD if [ ${APP_ENV} = production ]; \
         then \
-            npm run build; \
+            npm install http-server -g && \
+            npm run build && \
+            cd build && \
+            hs -p 3000; \
         else \
             npm run start; \
         fi
