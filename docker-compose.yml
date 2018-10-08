@@ -24,6 +24,9 @@ services:
       - backend 
   web:
     build: .docker/web
+    depends_on:
+      - frontend
+      - backend
     ports:
       - "8080:80"
       - "8443:443"
@@ -31,6 +34,14 @@ services:
       - .env
     networks:
       - frontend
+      - backend
+  mongodb:
+    image: mongo:4.0
+    volumes:
+      - ./.mongodb:/data/db
+    env_file:
+      - .env
+    networks:
       - backend
 networks:
   backend:
