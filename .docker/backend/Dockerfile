@@ -5,9 +5,8 @@ ENV NPM_CONFIG_LOGLEVEL warn
 RUN mkdir -p /backend
 WORKDIR /backend
 
-COPY backend /backend
-
-COPY .docker/backend/pm2.config.json /etc/pm2.config.json
+COPY ./backend/pm2.config.json /etc/pm2.config.json
+COPY ./backend/package*.json /etc/
 
 RUN npm install
 RUN npm install pm2 -g
