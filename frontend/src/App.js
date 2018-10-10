@@ -3,6 +3,23 @@ import logo from './logo.svg';
 import './App.scss';
 
 class App extends Component {
+  componentDidMount() {
+    console.time();
+    let j = 0;
+    const t = 300;
+    const res = () => {
+      j++;
+      if (j >= t) {
+        console.timeEnd();
+      }
+    };
+    for (let i = 0; i < t; i++) {
+      fetch('/api/get')
+        .then(res)
+        .catch(res);
+    }
+  }
+
   render() {
     return (
       <div className="App">
