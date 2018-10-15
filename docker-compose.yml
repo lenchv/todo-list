@@ -26,8 +26,8 @@ services:
       - frontend
       - backend
     ports:
-      - "8080:80"
-      - "8443:443"
+      - "${APP_HTTP_PORT}:80"
+      - "${APP_HTTPS_PORT}:443"
     env_file:
       - .env
     networks:
