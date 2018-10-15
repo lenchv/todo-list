@@ -12,6 +12,10 @@ app.get('/api', function (req, res) {
   }, Math.random() * 5000);
 });
 
+app.get('/api/test', function (req, res) {
+  res.send('it works');
+});
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
