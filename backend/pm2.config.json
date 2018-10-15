@@ -1,17 +1,12 @@
 {
     "apps": [{
-        "name": "dev-server-api",
+        "name": "server-api",
         "script": "index.js",
         "watch": true,
         "ignore_watch" : [ "node_modules", "package.json", "package-lock.json" ],
         "watch_options": {
             "followSymlinks": false
         },
-        "cwd": "/backend"
-    }, {
-        "name": "server-api",
-        "script": "index.js",
-        "watch": false,
         "cwd": "/backend"
     }]
 }

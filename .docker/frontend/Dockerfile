@@ -7,7 +7,6 @@ WORKDIR /frontend
 
 COPY ./frontend/package*.json /frontend/
 
-RUN npm install
 RUN npm install http-server -g
 
 CMD if [ ${APP_ENV} = production ]; \
