@@ -14,7 +14,7 @@ class App extends Component {
       }
     };
     for (let i = 0; i < t; i++) {
-      fetch('/api/get')
+      fetch('/api/')
         .then(res)
         .catch(res);
     }
