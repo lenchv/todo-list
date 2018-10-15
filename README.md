@@ -2,17 +2,19 @@
 
 Start project:
 
-> docker-compose up
+> docker-compose run --rm frontend npm install
+> docker-compose run --rm backend npm install
+> docker-compose run --rm up -d
 
 In order to add new npm library the next command should be run:
 
-> docker-compose exec frontend npm install \<lib\>
+> docker-compose run --rm frontend npm install \<lib\>
 
 ## Containers description
 
 1) `frontend` - the React application. If `APP_ENV=production` then bundles are compiled to the directory `frontend/buld` and it has access on `:3000` port. If `APP_ENV=development` enabled hot relading and build has access on `:3000` port as well.
 
-2) `backend` - API server. If `APP_ENV=development` the hot reloading is enabled.
+2) `backend` - API server.
 
 3) `web` - nginx server that proxies `frontend` and `backend` containers. HTTPS is enabled. On production the files `.docker/web/server.crt` and `.docker/web/server.key` need to be changed on valid.
 
