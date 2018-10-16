@@ -27,8 +27,7 @@ branches:
     - develop
 
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: .travis/production.sh
-    on:
-      branch: master
+  provider: script
+  script: .travis/production.sh
+  on:
+    branch: master
