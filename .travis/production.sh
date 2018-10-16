@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh -t $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no -tt <<-EOF
+ssh -t $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no -i ~/.ssh/travis_rsa -tt <<-EOF
 cd ~/todo-list
 git pull origin master
 docker-compose pull

@@ -2,9 +2,11 @@
 
 Start project:
 
-> docker-compose run --rm frontend npm install
-> docker-compose run --rm backend npm install
-> docker-compose run --rm up -d
+```
+docker-compose run --rm frontend npm install
+docker-compose run --rm backend npm install
+docker-compose up -d
+```
 
 In order to add new npm library the next command should be run:
 
