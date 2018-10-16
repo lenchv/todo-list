@@ -1,3 +1,5 @@
+![travis](https://travis-ci.com/lenchv/todo-list.svg?branch=master)
+
 # My ToDo App
 
 Start project:
