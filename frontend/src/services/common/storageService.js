@@ -10,7 +10,13 @@ export default {
         const data = localStorage.getItem(key);
     
         try {
-            return JSON.parse(data);
+            const json = JSON.parse(data);
+        
+            if (json === null || json === undefined) {
+                return defaultValue;
+            }
+
+            return json;
         } catch (e) {
             return defaultValue;
         }
