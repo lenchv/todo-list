@@ -4,8 +4,6 @@ services:
 env:
   matrix:
     - DOCKER_COMPOSE_VERSION=1.22.0
-  global:
-    secure: eo3VvGLZIPuvP5IN8wNPj9KGM88VJ1Wu6R/1qtYvuDEbIWxs2Lf1ZXiXHjCBMo3xUIvFZ/4JWwGaak37pTv1TGvDnO0TcaeGFEjpmOY0umjOuG7vRqGtaX+eX4UfYoSNSJCAUFUqppu/rW/qqKGyqaR25RQnR5wcBpvcoymiROq3krnkCs8FB2iLOgA8ITFMqWNxmcuH+QP76AAtGl95KE97b78EVBv1FKQ24GyUbW+JpWuGSxKJSUsWaq+AZ4mLETexS1SBLETlvDA2SJjWgXgP2IWtwFSIip4Jvy98nLYe7iC2yd4xWvLFFLk+3KmBqD6TvUlRGc618cEWwXtfGw/s/Q2M1yTw3mzYganfgnbb7VOe99BD7tHTLwmj/7NRjfRSed+W72epRC5ke7d9DQie2rsuCSp/owO667+kMBP59ulAgOivHKF5f32JGso/niDQVTouwrzvzjzwg2NIfL+zEzq/0qWX/4pFzbYNg5ooTwXcmWOfwMsxIa4IWcaTQPPu7mpt8xq5cWsNmVG2zcj6jLO2VEVQhV1JA1qYcmjjyUZYOCXXsRzWgw2y/AreOrY8mHcxsqKk/ApVrjxvLciC9KSJVZmoTHpwefd5vPBUehxin2ewBlEBTVpIg3JTK7Dkb1/pH/wPRzDSxw67PA3IzJz9fsuRRg/1KYMHqE4=
 before_install:
   - openssl aes-256-cbc -k "$encrypted_key" -in ./travis_rsa.enc -out ~/.ssh/travis_rsa -d
   - sudo chmod 600 ~/.ssh/travis_rsa
