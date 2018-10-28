@@ -8,15 +8,16 @@ import injectSaga from '../../utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
 import { changeValue } from './actions';
+import ToDo from '../ToDo';
 
 class HomePage extends React.PureComponent {
     render() {
         return (
-            <div>
-                <span>{this.props.value}</span>
-                <input type="text" onChange={(e) => {
-                    this.props.changeValue(e.target.value)}
-                } />
+            <div className='homepage'>
+                <div className='todo-search'>
+                    <input type='text' className='todo-search__input' />
+                </div>
+                <ToDo />
             </div>
         );
     }
