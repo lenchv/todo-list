@@ -1,34 +1,29 @@
 sudo: required
-
 services:
   - docker
-
 env:
-  - DOCKER_COMPOSE_VERSION=1.22.0
-
+  matrix:
+    - DOCKER_COMPOSE_VERSION=1.22.0
 before_install:
-  - openssl aes-256-cbc -K $encrypted_6f3bcdc0e3de_key -iv $encrypted_6f3bcdc0e3de_iv -in ./travis_rsa.enc -out ~/.ssh/travis_rsa -d
+  - openssl aes-256-cbc -k "$encrypted_key" -in ./.travis/travis_rsa.enc -out ~/.ssh/travis_rsa -d
   - sudo chmod 600 ~/.ssh/travis_rsa
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose -v
-
 script:
   - cp .env.example .env
   - docker-compose run --rm backend npm install
   - docker-compose run --rm frontend npm install
   - docker-compose run --rm frontend npm run build
-
 branches:
   only:
     - master
     - develop
-
 deploy:
   - provider: script
     skip_cleanup: true
-    script: .travis/production.sh
+    script: ".travis/production.sh"
     on:
       branch: master
