@@ -1,6 +1,7 @@
 const play = (snapshot, events) => events.reduce((result, event) => event(result), snapshot);
 
-const undoReduService = snapshot => {
+const undoReduService = initialSnapshot => {
+    let snapshot = initialSnapshot;
     let events = [];
     let pos = -1;
 
@@ -29,6 +30,13 @@ const undoReduService = snapshot => {
         },
         canUndo() {
             return pos >= 0;
+        },
+        takeSnapshot() {
+            snapshot = play(snapshot, events.slice(0, pos + 1));
+            events = [];
+            pos = -1;
+
+            return snapshot;
         }
     };
 };

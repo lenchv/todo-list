@@ -19,6 +19,7 @@ class ToDo extends React.PureComponent {
 
         this.onUndo = this.onUndo.bind(this);
         this.onRedo = this.onRedo.bind(this);
+        this.onTakeSnapshot = this.onTakeSnapshot.bind(this);
     }
 
     onAddItem(text) {
@@ -45,6 +46,10 @@ class ToDo extends React.PureComponent {
         this.props.redoTodo();
     }
 
+    onTakeSnapshot() {
+        this.props.takeSnapshot();
+    }
+
     render() {
         return (
             <div className='todo'>
@@ -58,6 +63,7 @@ class ToDo extends React.PureComponent {
                     onEdit={this.onEdit}
                 />
                 <button disabled={!this.props.hasUndo} onClick={this.onUndo}>undo</button>
+                <button disabled={!this.props.hasUndo && !this.props.hasRedo} onClick={this.onTakeSnapshot}>snapshot</button>
                 <button disabled={!this.props.hasRedo} onClick={this.onRedo}>redo</button>
             </div>
         );

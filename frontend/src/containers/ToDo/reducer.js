@@ -50,6 +50,12 @@ export default (state = initialState, action) => {
                 hasUndo: undoRedo.canUndo(),
                 hasRedo: undoRedo.canRedo()
             };
+        case constant.TODO_TAKE_SNAPSHOT:
+            return {
+                todos: undoRedo.takeSnapshot(),
+                hasUndo: undoRedo.canUndo(),
+                hasRedo: undoRedo.canRedo()
+            };
         default:
             return state;
     }

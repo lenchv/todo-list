@@ -24,7 +24,7 @@ export const deleteItem = (id) => {
 
 export const editItem = (id, text) => {
     return {
-        type: constant.TODO_DELETE_ITEM,
+        type: constant.TODO_EDIT_ITEM,
         text,
         id
     };
@@ -36,4 +36,8 @@ export const undoTodo = () => ({
 
 export const redoTodo = () => ({
     type: constant.TODO_REDO_ITEM,
+});
+
+export const takeSnapshot = () => ({
+    type: constant.TODO_TAKE_SNAPSHOT
 });
