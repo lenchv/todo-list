@@ -1,20 +1,11 @@
 let express = require('express');
-
+const middlewares = require('./middlewares');
+const getRoutes = require('./routes');
 let app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World 2!');
-});
+middlewares.forEach(middleware => app.use(middleware));
 
-app.get('/api', function (req, res) {
-  setTimeout(() => {
-    res.send('ok');
-  }, Math.random() * 5000);
-});
-
-app.get('/api/test', function (req, res) {
-  res.send('it works');
-});
+app.use('/api/v1', getRoutes());
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
