@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import injectReducer from '../../utils/injectReducer';
 import reducer from './reducer';
-import * as actions from './acions';
+import * as actions from './actions';
 
 class ToDo extends React.PureComponent {
     constructor() {

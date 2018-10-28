@@ -1,16 +1,12 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import Routes from './Routes';
 
-import HomePage from '../HomePage'
-import { LoginPage } from '../LoginPage'
-
-export default function App() {
+const App = () => {
     return (
         <div>
-            <Switch>
-                <Route exact path='/' component={ HomePage } />
-                <Route path='/login' component={ LoginPage } />
-            </Switch>
+            <Routes />
         </div>
     );
 };
+
+export default App;
