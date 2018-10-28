@@ -5,7 +5,7 @@ env:
   matrix:
     - DOCKER_COMPOSE_VERSION=1.22.0
 before_install:
-  - openssl aes-256-cbc -k "$encrypted_key" -in ./travis_rsa.enc -out ~/.ssh/travis_rsa -d
+  - openssl aes-256-cbc -k "$encrypted_key" -in ./.travis/travis_rsa.enc -out ~/.ssh/travis_rsa -d
   - sudo chmod 600 ~/.ssh/travis_rsa
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
