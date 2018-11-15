@@ -21,6 +21,6 @@ module.exports = (model) => {
         "update": _update,
         "delete": _delete,
         "findByCriteria": _findByCriteria,
-        "_findById": _findById
+        "findById": _findById
     };
 };
