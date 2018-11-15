@@ -7,9 +7,10 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const jwtSecret = process.env.JWT_SECRET;
 
 const userRepository = require('../repositories/userRepository');
+const hashService = require('./hashService');
 
 const getJwtTokenByUser = (user) => {
-    return jwt.sign(user, jwtSecret);
+    return jwt.sign({ id: user._id }, jwtSecret);
 };
 
 const getUserById = (id) => {
@@ -21,15 +22,19 @@ const getUserByEmailAndPassword = (email, password) => {
         return Promise.reject(new Error('Email or password is incorrect!'));
     }
 
-    return userRepository.findByCriteria({
-        email, password
-    }).then(user => {
-        if (user === null) {
-            return Promise.reject(new Error('User not found!'));
-        }
-
-        return user;
-    });
+    return hashService.getHash(password)
+        .then(password => {
+            return userRepository.findByCriteria({
+                email, password
+            });
+        })
+        .then(users => {
+            if (!users.length) {
+                return Promise.reject(new Error('User not found!'));
+            }
+    
+            return users[0];
+        });
 };
 
 const authenticate = (email, password) => {
@@ -76,13 +81,25 @@ const signUpUser = ({
         name = 'User';
     }
 
-    return userRepository.add({
-        email, password, name
-    })
-    .then(user => ({
-        token: getJwtTokenByUser(user),
-        user
-    }));
+    return userRepository.findByCriteria({ email })
+        .then(user => {
+            if (user.length) {
+                return Promise.reject(new Error('User has already registered!'));
+            }
+
+            return hashService.getHash(password);
+        })
+        .then(password => {
+            return userRepository.create({
+                email, password, name
+            });
+        })
+        .then(user => {
+            return ({
+                token: getJwtTokenByUser(user),
+                user
+            });
+        });
 };
 
 module.exports = {

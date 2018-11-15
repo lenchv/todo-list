@@ -7,6 +7,7 @@ const successResponse = (response, data) => {
 };
 
 const errorResponse = (response, error) => {
+    console.error(error);
     return response.status(error.status || 403).json(normalizeResponse({
         error: error.message
     }));

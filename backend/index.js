@@ -1,7 +1,9 @@
 require('dotenv').config();
+const process = require('process');
 const { requireService, requireController } = require('./helpers/requireHelper');
 const authService = requireService('authService');
 const { errorResponse } = requireController('basicController');
+const initializeDb = require('./helpers/initializeDb');
 const express = require('express');
 const checkAuth = require('./middlewares/checkAuth');
 const middlewares = require('./middlewares');
@@ -11,6 +13,14 @@ const app = express();
 middlewares.forEach(middleware => app.use(middleware));
 
 authService.initJwt();
+
+initializeDb({
+  host: process.env.MONGODB_HOST,
+  port: process.env.MONGODB_PORT,
+  user: process.env.MONGODB_USER,
+  pass: process.env.MONGODB_PASSWORD,
+  dbName: process.env.MONGODB_DATABASE
+});
 
 app.use('/api/v1', getRoutes(checkAuth));
 
