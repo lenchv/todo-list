@@ -34,7 +34,12 @@ const getUserByEmailAndPassword = (email, password) => {
 
 const authenticate = (email, password) => {
     return getUserByEmailAndPassword(email, password)
-        .then(getJwtTokenByUser);
+        .then(user => {
+            return ({
+                token: getJwtTokenByUser(user),
+                user
+            })
+        });
 };
 
 const initJwt = () => {
@@ -74,7 +79,10 @@ const signUpUser = ({
     return userRepository.add({
         email, password, name
     })
-    .then(getJwtTokenByUser);
+    .then(user => ({
+        token: getJwtTokenByUser(user),
+        user
+    }));
 };
 
 module.exports = {

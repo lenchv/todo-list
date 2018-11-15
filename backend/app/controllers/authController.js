@@ -2,8 +2,8 @@ const { successResponse, errorResponse } = require('./basicController');
 const authService = require('../services/authService');
 
 const signIn = (request, response) => {
-    authService.authenticate(request.email, request.password)
-        .then(token => successResponse(response, { token }))
+    authService.authenticate(request.query.email, request.query.password)
+        .then(({user, token}) => successResponse(response, { user, token }))
         .catch(err => errorResponse(response, err));
 };
 
@@ -14,7 +14,7 @@ const signUp = (request, response) => {
         password: request.body.password,
         repeatPassword: request.body.repeatPassword
     })
-    .then(token => successResponse(response, { token }))
+    .then(({ token, user }) => successResponse(response, { token, user }))
     .catch(err => errorResponse(response, err));
 };
 

@@ -1,12 +1,14 @@
-import auth from "./auth/";
+import auth, { initialState as authState } from "./auth/";
+import error, { initialState as errorState } from "./error/";
 import applyReducers from "../../../helpers/commons/applyReducers";
 
 const initialState = {
-    auth: {}
+    auth: authState,
+    error: errorState
 };
 
 export default (state = initialState, action) => {
     return applyReducers({
-        auth
+        auth, error
     }, state, action);
 };

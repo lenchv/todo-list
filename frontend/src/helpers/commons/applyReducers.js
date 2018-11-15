@@ -4,6 +4,7 @@ export default (reducers, state, action) => {
         const reducer = reducers[key];
 
         return Object.assign(
+            {},
             state,
             { [key]: reducer(state[key], action) }
         );
