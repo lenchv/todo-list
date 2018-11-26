@@ -1,34 +1,31 @@
 import * as constant from './constants';
-import toDoService from '../../services/todo/toDoService';
 
 export const addItem = (text) => {
     return {
-        type: constant.TODO_ADD_ITEM,
-        item: toDoService.getItem({ text })
+        type: constant.TODO_SEND_ADD_ITEM_REQUEST,
+        text
     };
 };
 
-export const completeItem = (id) => {
-    return {
-        type: constant.TODO_COMPLETE_ITEM,
-        id
-    };
-};
+export const loadTodoItems = () => ({
+    type: constant.TODO_SEND_GET_ALL_ITEMS_REQUEST
+});
 
-export const deleteItem = (id) => {
-    return {
-        type: constant.TODO_DELETE_ITEM,
-        id
-    };
-};
+export const deleteItem = (id) => ({
+    type: constant.TODO_SEND_DELETE_ITEM_REQUEST,
+    id
+});
 
-export const editItem = (id, text) => {
-    return {
-        type: constant.TODO_EDIT_ITEM,
-        text,
-        id
-    };
-};
+export const completeItem = (id) => ({
+    type: constant.TODO_SEND_COMPLETE_ITEM_REQUEST,
+    id
+});
+
+export const editItem = (id, text) => ({
+    type: constant.TODO_SEND_CHANGE_TEXT_REQUEST,
+    text,
+    id
+});
 
 export const undoTodo = () => ({
     type: constant.TODO_UNDO_ITEM,

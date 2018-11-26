@@ -12,13 +12,24 @@ const getAll = (request, response) => {
 };
 
 const add = (request, response) => {
-    todoService.add(request.body.data)
-        .then(todo => {
-            successResponse(response, todo);
-        })
-        .catch(error => {
-            errorResponse(response, error);
-        });
+    todoService.add({
+        text: request.body.text
+    }).then(todo => {
+        successResponse(response, todo);
+    }).catch(error => {
+        errorResponse(response, error);
+    });
+};
+
+const update = (request, response) => {
+    todoService.update(request.params.id, {
+        text: request.body.text,
+        isCompleted: request.body.isCompleted,
+    }).then(todo => {
+        successResponse(response, todo);
+    }).catch(error => {
+        errorResponse(response, error);
+    });
 };
 
 const deleteById = (request, response) => {
@@ -34,5 +45,6 @@ const deleteById = (request, response) => {
 module.exports = {
     getAll,
     add,
+    update,
     deleteById
 };

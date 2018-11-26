@@ -8,6 +8,17 @@ export const decode = (response) => {
     };
 };
 
+export const decodeError = (error) => {
+    if (error instanceof Error) {
+        return error;
+    } else if (error.response) {
+        return new Error(decode(error.response).data.error);
+    } else {
+        return new Error(error);
+    }
+};
+
 export default {
-    decode
+    decode,
+    decodeError
 };

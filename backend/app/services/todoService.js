@@ -5,6 +5,9 @@ const getAll = () => {
 };
 
 const add = (todoData) => {
+    if (!todoData.text) {
+        return Promise.reject(new Error('todo item cannot be empty!'));
+    }
     if (Object(todoData) !== todoData) {
         return Promise.reject(new Error('todo item has incorrect format'));
     }
@@ -26,9 +29,19 @@ const getById = (id) => {
     return todoRepository.find(id);
 };
 
+const update = (id, { text, isCompleted }) => {
+    return todoRepository.find(id)
+        .then(item => {
+            return todoRepository.update(Object.assign({}, item, {
+                text, isCompleted
+            }));
+        });
+};
+
 module.exports = {
     getAll,
     add,
+    update,
     deleteById,
     getById
 };
