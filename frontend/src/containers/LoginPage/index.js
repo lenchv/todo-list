@@ -2,24 +2,12 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import InputContainer from './InputContainer';
 
 import injectSaga from '../../utils/injectSaga';
-import injectReducer from '../../utils/injectReducer';
 
 import saga from './saga';
 import * as actions from './actions';
-import reducer from './reducer';
-
-const InputContainer = ({ label, onChange, value, type }) => (
-    <div className='login-form__input-container'>
-        <div className='login-form__label-box'>
-            <label className='login-form__label'>{ label }</label>
-        </div>
-        <div className='login-form__input-box'>
-            <input className='login-form__input' {...{onChange, value, type}}/>
-        </div>
-    </div>
-);
 
 class LoginPage extends React.PureComponent {
     constructor() {
@@ -53,7 +41,6 @@ class LoginPage extends React.PureComponent {
             <div className='login-page'>
                 <div className='login-form'>
                     <div className='login-form__header'>Login as</div>
-                    <div>{ this.props.error }</div>
                     <div className='login-form__body'>
                         <InputContainer
                             label={ 'Login' }
@@ -79,14 +66,10 @@ class LoginPage extends React.PureComponent {
     }
 }
 
-const withConnect = connect((state) => ({
-    error: state.auth.error
-}), Object.assign({}, actions));
+const withConnect = connect((state) => ({}), Object.assign({}, actions));
 const withSaga = injectSaga('auth', saga);
-const withReducer = injectReducer('auth', reducer);
 
 export default compose(
-    withReducer,
     withSaga,
     withConnect
 )(LoginPage);

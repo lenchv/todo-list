@@ -5,7 +5,9 @@ import ToDoList from '../../components/ToDo/ToDoList';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import injectReducer from '../../utils/injectReducer';
+import injectSaga from '../../utils/injectSaga';
 import reducer from './reducer';
+import saga from './saga';
 import * as actions from './actions';
 
 class ToDo extends React.PureComponent {
@@ -50,6 +52,10 @@ class ToDo extends React.PureComponent {
         this.props.takeSnapshot();
     }
 
+    componentDidMount() {
+        this.props.loadTodoItems();
+    }
+
     render() {
         return (
             <div className='todo'>
@@ -77,8 +83,10 @@ const withConnect = connect((state) => ({
 }), Object.assign({}, actions));
 
 const withReducer = injectReducer('todo', reducer);
+const withSaga = injectSaga('todo', saga);
 
 export default compose(
     withReducer,
+    withSaga,
     withConnect
 )(ToDo);

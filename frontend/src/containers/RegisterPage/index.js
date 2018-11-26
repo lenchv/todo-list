@@ -20,8 +20,8 @@ class RegisterPage extends React.PureComponent {
             }
         };
 
-        this.onChangeUserName = this.onChangeUserData.bind(this, 'username');
-        this.onChangeLogin = this.onChangeUserData.bind(this, 'login');
+        this.onChangeUserName = this.onChangeUserData.bind(this, 'name');
+        this.onChangeLogin = this.onChangeUserData.bind(this, 'email');
         this.onChangePassword = this.onChangeUserData.bind(this, 'password');
         this.onChangeRepeatPassword = this.onChangeUserData.bind(this, 'repeatPassword');
         this.onRegister = this.onRegister.bind(this);
@@ -53,7 +53,7 @@ class RegisterPage extends React.PureComponent {
                     <input type='text' onChange={this.onChangeUserName}/>
                 </div>
                 <div>
-                    <label>Login</label>
+                    <label>Email</label>
                     <input type='text' onChange={this.onChangeLogin}/>
                 </div>
                 <div>

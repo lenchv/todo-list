@@ -1,9 +1,11 @@
 import * as constant from './constants';
 import objectService from '../../../../services/common/objectService';
 
-export default (state = {
+export const initialState = {
     user: {}
-}, action) => {
+};
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case constant.ADD_USER:
             return objectService.insert(state, 'user', action.user);

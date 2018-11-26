@@ -3,6 +3,7 @@ import * as constant from './constants'
 import * as authConstant from '../App/reducer/auth/constants'
 import { login } from '../../services/auth/authService';
 import { push } from 'react-router-redux';
+import { SET_ERROR, UNSET_ERROR } from '../App/reducer/error/constants';
 
 export function* sendLoginRequest(action) {
     try {
@@ -16,13 +17,12 @@ export function* sendLoginRequest(action) {
         yield put(push('/'));
 
         yield put({
-            type: constant.LOGIN_SET_ERROR,
-            error: ''
+            type: UNSET_ERROR
         });
     } catch (e) {
         yield put({
-            type: constant.LOGIN_SET_ERROR,
-            error: e.message
+            type: SET_ERROR,
+            message: e.message
         });
     }
 };

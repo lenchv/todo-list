@@ -1,11 +1,12 @@
 import React from 'react';
 import Routes from './Routes';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const App = () => {
     return (
-        <div>
+        <ErrorBoundary>
             <Routes />
-        </div>
+        </ErrorBoundary>
     );
 };
 

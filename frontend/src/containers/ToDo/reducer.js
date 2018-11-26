@@ -2,7 +2,7 @@ import normalizeService from "../../services/common/normalizeService";
 import undoReduService from "../../services/undoReduService";
 import * as constant from './constants';
 import {
-    addItem, completeItem, deleteItem, editItem
+    addItem, deleteItem, editItem
 } from '../../services/todo/toDoEvents';
 
 const initialState = {
@@ -10,10 +10,19 @@ const initialState = {
     hasUndo: false,
     hasRedu: false
 };
-const undoRedo = undoReduService(initialState.todos);
+let undoRedo = undoReduService(initialState.todos);
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case constant.LOAD_TODO_ITEMS:
+            let loadedToDos = action.items.reduce(normalizeService.add, state.todos);
+            undoRedo = undoReduService(loadedToDos);
+
+            return {
+                todos: loadedToDos,
+                hasUndo: undoRedo.canUndo(),
+                hasRedo: undoRedo.canRedo()
+            };
         case constant.TODO_ADD_ITEM:
             return {
                 todos: undoRedo.add(addItem(action.item)),
@@ -26,15 +35,9 @@ export default (state = initialState, action) => {
                 hasUndo: undoRedo.canUndo(),
                 hasRedo: undoRedo.canRedo()
             };
-        case constant.TODO_COMPLETE_ITEM:
-            return {
-                todos: undoRedo.add(completeItem(action.id)),
-                hasUndo: undoRedo.canUndo(),
-                hasRedo: undoRedo.canRedo()
-            };
         case constant.TODO_EDIT_ITEM:
             return {
-                todos: undoRedo.add(editItem(action.id, action.text)),
+                todos: undoRedo.add(editItem(action.item)),
                 hasUndo: undoRedo.canUndo(),
                 hasRedo: undoRedo.canRedo()
             };
